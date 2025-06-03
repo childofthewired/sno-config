@@ -1,0 +1,16 @@
+#This sets the internal local network for the SNO cluster as it only has a single NIC.
+#this allows pods and virtual machines to be connected to the external network
+#See https://www.redhat.com/en/blog/access-external-networks-with-openshift-virtualization
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: br-ex-network
+spec:
+#  nodeSelector:
+#    node-role.kubernetes.io/worker: '' 
+  desiredState:
+    ovn:
+      bridge-mappings:
+      - localnet: br-ex-network
+        bridge: br-ex 
+        state: present
