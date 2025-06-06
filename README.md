@@ -7,6 +7,11 @@ I use this for demonstrations and reproducers of of customer issues.
 
 As many configurations as possible are maintained in OpenShift GitOPS (ArgoCD).
 
+Configure the default storage class 
+
+oc patch storageclass lvms-vg1 -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+
+
 Configuring the registry in bare metal:
 
 oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"managementState":"Managed"}}'
